@@ -1,8 +1,6 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/Lyarkh/gopportunities/handler"
 	"github.com/gin-gonic/gin"
 )

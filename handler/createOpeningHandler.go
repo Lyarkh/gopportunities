@@ -6,9 +6,10 @@ import (
 
 func CreateOpeningHandler(ctx *gin.Context) {
 	request := struct {
-		role string
+		Role string `json:"role"`
 	}{}
 
 	ctx.BindJSON(&request)
+	logger.Infof("request received: %v", request)
 
 }

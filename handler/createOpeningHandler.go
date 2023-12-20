@@ -9,4 +9,6 @@ func CreateOpeningHandler(ctx *gin.Context) {
 		role string
 	}{}
 
+	ctx.BindJSON(&request)
+
 }

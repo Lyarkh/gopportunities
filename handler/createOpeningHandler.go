@@ -5,11 +5,19 @@ import (
 )
 
 func CreateOpeningHandler(ctx *gin.Context) {
-	request := struct {
-		Role string `json:"role"`
-	}{}
+	request := CreateOpeningRequest{}
 
 	ctx.BindJSON(&request)
 	logger.Infof("request received: %v", request)
+
+	if err := request.Validate(); err != nil {
+		logger.Errorf("validation error: %v", err.Error())
+		return
+	}
+
+	if err := db.Create(&request).Error; err != nil {
+		logger.Errorf("error creating opening: %v", err.Error())
+		return
+	}
 
 }

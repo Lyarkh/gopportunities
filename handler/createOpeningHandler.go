@@ -29,7 +29,7 @@ func CreateOpeningHandler(ctx *gin.Context) {
 
 	}
 
-	if err := db.Create(&request).Error; err != nil {
+	if err := db.Create(&opening).Error; err != nil {
 		logger.Errorf("error creating opening: %v", err.Error())
 		sendError(ctx, http.StatusInternalServerError, "erorr creating oppening on database")
 		return

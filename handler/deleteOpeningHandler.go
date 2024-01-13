@@ -20,4 +20,12 @@ func DeleteOpeningHandler(ctx *gin.Context) {
 		sendError(ctx, http.StatusNotFound, fmt.Sprintf("opening with id: %s not found", id))
 		return
 	}
+
+	if err := db.Delete(&opening).Error; err != nil {
+		sendError(ctx, http.StatusInternalServerError, fmt.Sprintf("error deleting opening with iid: %s", id))
+		return
+
+	}
+
+	sendSuccess(ctx, "delete-opening", opening)
 }

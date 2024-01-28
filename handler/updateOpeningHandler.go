@@ -30,4 +30,23 @@ func UpdateOpeningHandler(ctx *gin.Context) {
 		sendError(ctx, http.StatusNotFound, "openinig not found")
 		return
 	}
+
+	if request.Role != "" {
+		opening.Role = request.Role
+	}
+	if request.Company != "" {
+		opening.Company = request.Company
+	}
+	if request.Location != "" {
+		opening.Location = request.Location
+	}
+	if request.Remote != nil {
+		opening.Remote = *request.Remote
+	}
+	if request.Link != "" {
+		opening.Link = request.Link
+	}
+	if request.Salary > 0 {
+		opening.Salary = request.Salary
+	}
 }

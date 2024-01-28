@@ -54,4 +54,13 @@ func UpdateOpeningHandler(ctx *gin.Context) {
 	if request.Salary > 0 {
 		opening.Salary = request.Salary
 	}
+
+	if err := db.Save(&opening).Error; err != nil {
+		logger.Errorf("error updating openinig: %v", err.Error())
+		sendError(ctx, http.StatusInternalServerError, "error updating opening")
+		return
+	}
+
+	sendSuccess(ctx, "updating-opening", opening)
+
 }

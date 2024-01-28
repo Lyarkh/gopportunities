@@ -3,6 +3,7 @@ package handler
 import (
 	"net/http"
 
+	"github.com/Lyarkh/gopportunities/schemas"
 	"github.com/gin-gonic/gin"
 )
 
@@ -20,6 +21,13 @@ func UpdateOpeningHandler(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {
 		sendError(ctx, http.StatusBadRequest, errParamIsRequired("id", "queryParameter").Error())
+		return
+	}
+
+	opening := schemas.Opening{}
+
+	if err := db.First(&opening, id).Error; err != nil {
+		sendError(ctx, http.StatusNotFound, "openinig not found")
 		return
 	}
 }
